@@ -3,4 +3,5 @@ plotly
 pillow
 opencv-python
 matplotlib
+seaborn
 streamlit
