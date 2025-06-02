@@ -1,115 +1,82 @@
 # 🧱 Predicción de Resistencia del Concreto
 
-Este es un sistema inteligente para predecir la resistencia a la compresión del concreto (en MPa) basado en sus componentes y la edad de curado, utilizando técnicas de Machine Learning.  
-La aplicación está desarrollada con **Streamlit** y desplegada en **Streamlit Cloud**, ofreciendo una interfaz interactiva para predicciones y visualizaciones de datos.
+Aplicación desarrollada con técnicas de aprendizaje automático para predecir la resistencia a la compresión del concreto a partir de sus componentes y edad de curado. Implementada con **Streamlit** y disponible en la nube.
+
+🔗 [Aplicación Web](https://pfml-ortiz-perez-zamora.streamlit.app/)  
 
 ---
 
-## 📌 Descripción del Proyecto
+## 🎯 Objetivo
 
-### 🎯 Objetivo
-Desarrollar un modelo predictivo para optimizar diseños de mezclas de concreto, asegurando calidad, durabilidad y eficiencia de costos en la construcción.
-
-### 🧪 Metodología
-- Análisis exploratorio de datos de componentes de concreto.
-- Preprocesamiento de datos (normalización/escalado).
-- Entrenamiento de modelos de regresión (`Random Forest`, `Gradient Boosting`, `SVR`).
-- Evaluación y selección del mejor modelo según métricas de rendimiento.
-- Implementación de una interfaz web con **Streamlit**.
-
-### 💡 Importancia
-Permite reducir costos, garantizar calidad y minimizar el impacto ambiental en la producción de concreto.
-
----
-
-## 📂 Estructura de Notebooks
-
-El proyecto se divide en tres notebooks principales:
-
-### `NB1_EDA_Ortiz_Perez_Zamora.ipynb`
-- **Objetivo:** Análisis exploratorio de datos (EDA).
-- **Entrada:** `Concrete_Data.xls` (dataset original).
-- **Salida:** `cleaned_concrete_data.csv` (dataset limpio).
-
-### `NB2_MODELO_Ortiz_Perez_Zamora.ipynb`
-- **Objetivo:** Ajuste de hiperparámetros y selección del mejor modelo.
-- **Entrada:** `cleaned_concrete_data.csv`.
-- **Salida:** `modelo.pkl` (modelo entrenado y serializado).
-
-### `NB3_STREAMLIT_Ortiz_Perez_Zamora.ipynb`
-- **Objetivo:** Integración del modelo en la interfaz web (Streamlit).
-- **Entrada:** `Concrete_Data.xls` y `modelo.pkl`.
-
----
-
-## 🛠️ Características del Proyecto
-
-- **Pestaña de Predicción:**  
-  Ingresa los valores de los componentes de la mezcla (cemento, escoria, ceniza volante, agua, superplastificante, agregados gruesos/finos y edad) para predecir la resistencia a la compresión.
-
-- **Pestaña de Información:**  
-  Detalles sobre los objetivos del proyecto, metodología, análisis de variables y rangos de aplicación.
-
-- **Pestaña de Visualizaciones:**  
-  Explora correlaciones, distribución de resistencia y relaciones entre cemento/edad y resistencia (requiere `Concrete_Data.xls`).
-
----
-
-## ⚙️ Requisitos del Proyecto
-
-### 📌 Python
-- Python 3.x
-
-### 📦 Librerías (en `requirements.txt`)
-- `scikit-learn`  
-- `plotly`  
-- `pillow`  
-- `opencv-python`  
-- `matplotlib`  
-- `seaborn`  
-- `openpyxl`  
-- `streamlit`  
-- `pandas`  
-- `numpy`  
-- `xlrd`
-
-### 🖥️ Dependencias del sistema (en `packages.txt`)
-- `libgl1-mesa-glx`
-
----
-
-## 🚀 Instrucciones de Uso
-
-Accede a la aplicación en:  
-🔗 [https://pfml-ortiz-perez-zamora.streamlit.app/](https://pfml-ortiz-perez-zamora.streamlit.app/)
-
----
-
-## 🧪 Uso
-
-1. **Predicción:**  
-   Ingresa los valores de la mezcla en la pestaña "Predicción" y haz clic en **"Predecir resistencia"** para obtener la resistencia estimada, categoría y recomendaciones.
-
-2. **Visualizaciones:**  
-   Selecciona un tipo de visualización en la pestaña "Visualizaciones" para analizar el dataset (ej. matriz de correlación, histogramas).
-
-3. **Información:**  
-   Revisa detalles del proyecto, impacto de variables y rangos de resistencia del concreto en la pestaña "Información del Proyecto".
+Desarrollar un modelo de regresión supervisada que prediga la resistencia del concreto (MPa), facilitando decisiones técnicas, reduciendo costos y evitando ensayos destructivos.
 
 ---
 
 ## 📊 Dataset
 
-- **Fuente:**  
-  Repositorio de Machine Learning de UCI – *Concrete Compressive Strength Data Set*.
-
-- **Archivo:**  
-  `Concrete_Data.xls` (contiene componentes de mezcla y valores de resistencia).
+- Fuente: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/concrete+compressive+strength)
+- Observaciones: 1030  
+- Variables: 8 predictoras + 1 objetivo (resistencia a la compresión)  
+- Formato original: `Concrete_Data.xls`
 
 ---
 
-## 👥 Colaboradores
+## ⚙️ Pipeline del Proyecto
 
-- Diego Mauricio Ortiz (22500445)  
-- Daniel Felipe Zamora Pineda (22500225)  
-- Jairo Andrés Pérez Hurtado (22500487)
+1. **EDA** (`NB1_EDA_Ortiz_Perez_Zamora.ipynb`)
+   - Limpieza, visualización y análisis de datos.
+   - Entrada: `Concrete_Data.xls`
+   - Salida: `cleaned_concrete_data.csv`
+
+2. **Modelado** (`NB2_MODELO_Ortiz_Perez_Zamora.ipynb`)
+   - Comparación de modelos: Random Forest, SVR y Gradient Boosting.
+   - Validación cruzada + ajuste de hiperparámetros.
+   - Entrada: `cleaned_concrete_data.csv`
+   - Salida: `modelo.pkl` 
+
+3. **Despliegue** (`NB3_STREAMLIT_Ortiz_Perez_Zamora.ipynb`)
+   - Carga del modelo y dataset.
+   - Interfaz con Streamlit.
+   - Etrada #1: `Concrete_Data.xls`
+   - Entrada #2: `modelo.pkl`
+   - Salida: `app.py`
+
+---
+
+## 🧪 Funcionalidades
+
+- **Predicción:** Ingreso de variables y cálculo de resistencia estimada.
+- **Visualización:** Histogramas, correlaciones y análisis exploratorio.
+- **Información del proyecto:** Metodología, rangos de uso y datos clave.
+
+---
+
+## 📦 Requisitos
+
+### Python
+- Python 3.x
+
+### Dependencias (`requirements.txt`)
+- `scikit-learn`, `pandas`, `numpy`, `matplotlib`, `seaborn`,  
+  `plotly`, `streamlit`, `openpyxl`, `xlrd`, `pillow`, `opencv-python`
+
+### Sistema (`packages.txt`)
+- `libgl1-mesa-glx`
+
+---
+
+## 👨‍💻 Colaboradores
+
+- **Jairo Andrés Pérez Hurtado** (22500487)  
+- **Daniel Felipe Zamora Pineda** (22500225)  
+- **Diego Mauricio Ortiz** (22500445)
+
+Profesor: **Sergio Alejandro Cantillo Luna**  
+Universidad Autónoma de Occidente – Maestría en IA y Ciencia de Datos (2025)
+
+---
+
+## 📚 Referencias
+
+- Yeh, I. C. (1998). *Modeling of strength of high-performance concrete using neural networks*. Cement and Concrete Research.  
+- Chou et al. (2011). *Machine learning in concrete strength simulations*. Construction and Building Materials.
